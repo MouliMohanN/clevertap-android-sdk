@@ -3929,12 +3929,14 @@ public class CleverTapAPI implements CTInAppNotification.CTInAppNotificationList
             return;
         }
 
-        if (inAppNotification.getError() != null) {
-            getConfigLogger().debug(getAccountId(), "Unable to process inapp notification " + inAppNotification.getError());
-            return;
+        if (null != inAppNotification) {
+           if (inAppNotification.getError() != null) {
+              getConfigLogger().debug(getAccountId(), "Unable to process inapp notification " + inAppNotification.getError());
+              return;
+           }
+           getConfigLogger().debug(getAccountId(), "Notification ready: " + inAppNotification.getJsonDescription());
+           displayNotification(inAppNotification);
         }
-        getConfigLogger().debug(getAccountId(), "Notification ready: " + inAppNotification.getJsonDescription());
-        displayNotification(inAppNotification);
     }
 
     //InApp
